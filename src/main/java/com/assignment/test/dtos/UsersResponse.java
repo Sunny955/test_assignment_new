@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class UsersResponse {
-    List<UserDto> userDtoList;
+    List<UserDto> users;
     Integer pageNumber;
     Integer pageSize;
     long totalElements;

@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @Slf4j
-@RequestMapping("/api/user")
+@RestController
+@RequestMapping("/api/user/")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -24,6 +25,7 @@ public class UserController {
     private final UserMappers userMappers;
 
     @GetMapping("/get-all")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UsersResponse> getAllUsers(
             @RequestParam(defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
             @RequestParam(defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize
@@ -42,6 +44,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Map<String,String>> deleteUser(@PathVariable String id) {
         Optional<User> user = userService.findById(id);
 
